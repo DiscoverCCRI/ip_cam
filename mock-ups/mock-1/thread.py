@@ -16,9 +16,9 @@ class CameraStream(object):
         self.read_lock = Lock()
     
     def start(self):
-    """
-    start our thread if not already started
-    """
+        """
+        start our thread if not already started
+        """
         if self.started:
             print("already started!!")
             return None
@@ -28,9 +28,9 @@ class CameraStream(object):
         return self
 
     def update(self):
-    """ 
-    update our frames
-    """
+        """ 
+        update our frames
+        """
         while self.started:
             (grabbed, frame) = self.stream.read()
             self.read_lock.acquire()
@@ -38,24 +38,20 @@ class CameraStream(object):
             self.read_lock.release()
 
     def read(self):
-    """
-    return our frames 
-    """
+        """
+        return our frames 
+        """
         self.read_lock.acquire()
         frame = self.frame.copy()
         self.read_lock.release()
         return frame
 
-    """
-    join our frames
-    """
     def stop(self):
+        # join frames
         self.started = False
         self.thread.join()
 
-    """
-    exit our threads and release the stream
-    """
     def __exit__(self, exc_type, exc_value, traceback):
+        # exit thread
         self.stream.release()
 
