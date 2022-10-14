@@ -9,7 +9,7 @@ Note: Will also be working on some implementations in C++. For now see some exam
 
 # Dependencies
 ---
-- Assumes you are using some type of linux-based (or OSX)environment. More specifically
+- Assumes you are using some type of linux-based (or OSX) environment. More specifically
 this repo was tested on the Rapsberry Pi 4 especially the portion on Docker.
 
 ### minimal dependencies
