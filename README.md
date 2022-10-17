@@ -1,17 +1,15 @@
 # Introduction
-WIP repo using opencv, flask and ngrok with python to stream feeds
-of RTSP based cameras for the Discover test site specifically for the 
-upcoming NSF demo.
+Repo containing examples with flask, opencv, crow, ffmpeg, etc as well as 
+mockups of an RTSP based IP camera stream application. The project was intended
+to serve as a solution to view the Discover CCRI test site however the amount 
+of issues that arised with python threading, codec + buffering issues, and more
+issues related to performance, lead to the final solution to be a pre-existing 
+open source CCTV application zoneminder. Check it out [here](https://github.com/DiscoverCCRI/site-surveillance)
 
 ---
-
-Note: Will also be working on some implementations in C++. For now see some examples on providing basic feed.
 
 # Dependencies
 ---
-- Assumes you are using some type of linux-based (or OSX) environment. More specifically
-this repo was tested on the Rapsberry Pi 4 especially the portion on Docker.
-
 ### minimal dependencies
 **fetch updates**
 ```
@@ -71,21 +69,6 @@ bulk install our python dependencies using pip
 ```
 $ pip3 install datetime opencv-python flask imutils
 ```
-
-# Build this project
----
-**with Docker**
-```
-$ git clone git@github.com:DiscoverCCRI/ip_cam.git &&
-cd /scripts 
-$ docker build -t ip_cam . &&
-docker image ls
-$ docker container run --privledged -d ip_cam
-```
-**manually**
-```
-$ git clone git@github.com:DiscoverCCRI/ip_cam.git &&
-cd ip_cam/src &&
 python3 test_stream_v1.py proxy_stream.py
 ```
 Enter the IP address of the machine you are hosting this project from in a browser
@@ -93,6 +76,12 @@ and your feed should be present.
 
 # Issues
 ---
+Below I highlight some issues I ran into when installing some dependencies for 
+the examples in this directory. Besides that the biggest issue was performance.
+Properly threading multiple streams to allow for the best quality stream proved
+difficult in python with opencv and flask. A proper solution could include the use
+of a low level language utilizing some sort of memory manipulation. 
+
 Issues I ran into when installing on Raspian on RPI 4
   - When installing imutils there might be some errors, to fix I installed
   these packages and fixed some various issues with numpy
@@ -137,7 +126,3 @@ see: ```ip_cam/src/test_stream_v1.py```
 ![example4](https://github.com/DiscoverCCRI/ip_cam/blob/main/imgs/ngrok_session.png)
 
 
-ZoneMinder
-
-install deb:
-https://zoneminder.readthedocs.io/en/stable/installationguide/debian.html
